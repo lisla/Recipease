@@ -5,17 +5,9 @@ import os
 
 recipes = set()
 
-headers = requests.utils.default_headers()
-headers.update({
-    'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',
-})
-
-if os.path.exists("recipes_with_ingredients.txt"):
-  os.remove("recipes_with_ingredients.txt")
-
 # Get list of recipes on the first 100 pages of AllRecipes.com
 def generate_urls():
-    for i in range(10,11):
+    for i in range(2):
         r  = requests.get("https://www.allrecipes.com/recipes/?page=" + str(i))
 
         data = r.text
@@ -37,15 +29,20 @@ def get_ingredients(link):
 
     item_ingredients = []
 
-    with open("recipes_with_ingredients.txt", "a") as myfile:
+    with open("recipes_with_ingredients2.txt", "w") as myfile:
         myfile.write(link.rstrip('\n') + " ")
         for ingredient in soup.find_all("span", {"itemprop": "recipeIngredient"}):
-            myfile.write(ingredient.text.rstrip('\n') + "@")
+            myfile.write(ingredient.text.rstrip('\n') + ":")
         myfile.write("\n")
 
 generate_urls()
 
 p = Pool(10)
-p.map(get_ingredients, list(recipes))
+l = list(recipes)
+for recipe in l:
+    try:
+        get_ingredients(recipe)
+    except:
+        print("There was an error")
 p.terminate()
 p.join()
