@@ -5,12 +5,17 @@ import os
 
 recipes = set()
 
+headers = requests.utils.default_headers()
+headers.update({
+    'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',
+})
+
 if os.path.exists("recipes_with_ingredients.txt"):
   os.remove("recipes_with_ingredients.txt")
 
 # Get list of recipes on the first 100 pages of AllRecipes.com
 def generate_urls():
-    for i in range(1):
+    for i in range(10,11):
         r  = requests.get("https://www.allrecipes.com/recipes/?page=" + str(i))
 
         data = r.text
