@@ -15,4 +15,15 @@ get_dictionary()
 for key in recipe_to_ingredients:
     print (key + ': ' + str(recipe_to_ingredients[key]))
     print('')
-# execute_query()
+    
+def execute_query(terms):
+    scores = {}
+    for key in recipe_to_ingredients:
+        ingredients = recipe_to_ingredients[key]
+        terms_matched = 0.0
+        for t in terms:
+            if any(t in i for i in ingredients):
+                terms_matched += 1.0
+        scores[key] = terms_matched / len(ingredients) 
+    sorted_scores = sorted(scores.keys(), key=lambda x: scores[x])
+    return sorted_scores            
