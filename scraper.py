@@ -5,7 +5,7 @@ import os
 
 recipes = set()
 
-# Get list of recipes on the first 100 pages of AllRecipes.com
+# Get list of recipes
 def generate_urls():
     for i in range(2):
         r  = requests.get("https://www.allrecipes.com/recipes/?page=" + str(i))

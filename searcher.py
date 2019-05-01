@@ -12,10 +12,10 @@ def get_dictionary():
             recipe_to_ingredients[recipe_link] = ingredients_list[0:len(ingredients_list) - 1]
 
 get_dictionary()
-for key in recipe_to_ingredients:
-    print (key + ': ' + str(recipe_to_ingredients[key]))
-    print('')
-    
+# for key in recipe_to_ingredients:
+#     print (key + ': ' + str(recipe_to_ingredients[key]))
+#     print('')
+
 def execute_query(terms):
     scores = {}
     for key in recipe_to_ingredients:
@@ -24,6 +24,9 @@ def execute_query(terms):
         for t in terms:
             if any(t in i for i in ingredients):
                 terms_matched += 1.0
-        scores[key] = terms_matched / len(ingredients) 
-    sorted_scores = sorted(scores.keys(), key=lambda x: scores[x])
-    return sorted_scores            
+        scores[key] = terms_matched / len(ingredients)
+    sorted_scores = sorted(scores.keys(), key=lambda x: scores[x], reverse=True)
+    return sorted_scores
+
+terms = {"garlic", "onion", "black beans"}
+print(execute_query(terms))
