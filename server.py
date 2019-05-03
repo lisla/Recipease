@@ -3,7 +3,7 @@ from flask_cors import CORS
 import json
 import sys
 
-app = Flask(__name__, static_folder="./static", template_folder="./build")
+app = Flask(__name__, static_folder="./ui/static", template_folder="./ui/build")
 CORS(app)
 
 def json_output(output):
