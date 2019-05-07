@@ -10,7 +10,7 @@ recipe_ids_to_info = {}
 
 data = []
 
-for i in range(100):
+for i in range(10):
     URL = baseURL + str(100*i + 1)
     # 100 recipes
     r = requests.get(url = URL)
