@@ -1,6 +1,5 @@
 import json
 
-#
 # def get_dictionary():
 #     recipe_to_ingredients = {}
 #     with open("recipes_with_ingredients.txt", "r") as myfile:
@@ -19,7 +18,7 @@ def get_dictionary():
     with open("recipe_ids_to_info.json", "r") as myfile:
         recipe_ids_to_info_string = json.load(myfile)
         recipe_ids_to_info = json.loads(recipe_ids_to_info_string)
-    print(recipe_ids_to_info)
+    # print(recipe_ids_to_info)
     return recipe_ids_to_info
 
 def execute_query(terms, recipe_ids_to_info):
