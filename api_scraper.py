@@ -17,7 +17,7 @@ for i in range(10):
     entry = r.json()
     data.append(entry)
 
-dictionary_file = open("recipe_ids_to_info2.json", "w")
+dictionary_file = open("recipe_ids_to_info.json", "w")
 
 for entry in data:
     # map each recipe to ID to name and ingredients
@@ -30,7 +30,7 @@ for entry in data:
         recipe_info = (recipe_name, recipe_ingredients)
         recipe_ids_to_info[recipe_id] = recipe_info
 
-    recipe_ids_to_info_json = json.dumps(recipe_ids_to_info)
-    json.dump(recipe_ids_to_info_json, dictionary_file)
+recipe_ids_to_info_json = json.dumps(recipe_ids_to_info)
+json.dump(recipe_ids_to_info_json, dictionary_file)
 
 print(len(recipe_ids_to_info))
