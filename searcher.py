@@ -1,5 +1,6 @@
 import json
-
+import requests
+import os
 # def get_dictionary():
 #     recipe_to_ingredients = {}
 #     with open("recipes_with_ingredients.txt", "r") as myfile:
@@ -21,6 +22,11 @@ def get_dictionary():
     # print(recipe_ids_to_info)
     return recipe_ids_to_info
 
+def get_info(recipe_id):
+    URL = 'http://api.yummly.com/v1/api/recipe/'+recipe_id+'?_app_id=5c90e1d3&_app_key=53cb9fb0d408116e7199f1a38099a0e8'
+    r = requests.get(url = URL)
+    return r.json()
+
 def execute_query(terms, recipe_ids_to_info):
     scores = {}
     for key in recipe_ids_to_info:
@@ -30,5 +36,8 @@ def execute_query(terms, recipe_ids_to_info):
             if any(t in i for i in ingredients):
                 terms_matched += 1.0
         scores[key] = terms_matched / len(ingredients)
-    sorted_scores = sorted(scores.keys(), key=lambda x: scores[x], reverse=True)
-    return sorted_scores
+    sorted_scores = sorted(scores.keys(), key=lambda x: scores[x], reverse=True)[:5]
+    output = []
+    for recipe in sorted_scores:
+        output.append(get_info(recipe))
+    return output

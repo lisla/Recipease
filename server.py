@@ -41,11 +41,10 @@ def recipes():
     # TODO: Rank all recipes based on their ingredients
     # Get top 5 and fetch links for these recipes using the API
     # Return recipe:link
-    sorted_scores = s.execute_query(i, recipe_ids_to_info)
+    result = s.execute_query(i, recipe_ids_to_info)
 
     # print(i, file=sys.stderr)
-    print(sorted_scores[:5])
-    json_data = json.dumps(sorted_scores[:5])
+    json_data = json.dumps(result)
     return json_data
 
 # Get the associated ingredients for a particular ingredient

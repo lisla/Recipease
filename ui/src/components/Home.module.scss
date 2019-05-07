@@ -43,3 +43,24 @@ body {
   flex-direction: column;
   flex-wrap: wrap;
 }
+
+.section {
+  text-decoration: none;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.card {
+  text-decoration: none;
+  margin: 5px;
+  border-radius: 10px;
+  border: 1px solid;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.card:hover {
+  background-color: #ff9966;
+}

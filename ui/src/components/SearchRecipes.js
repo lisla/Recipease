@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { searchRecipes } from '../actions/recipes';
-import {Button, Input} from 'semantic-ui-react';
+import {Button, Input, List, Card, Container} from 'semantic-ui-react';
 import styles from "./Home.module.scss";
 import IngredientList from "./IngredientList";
 
@@ -50,23 +50,17 @@ class SearchRecipes extends React.Component {
     populateResults = () => {
         let self = this;
         return(
-            <div>
-                <div className="ui list">{self.state.recipes.map(function(item, key) {
+            <Container className={styles.section}>
+              {self.state.recipes.map(function(item, index) {
                     return (
-                        <div className="item">
-                            <div className="ui card">
-                                <div className="content">
-                                    <div className="header">Chicken Piccatta</div>
-                                    <div className="meta">
-                                        <span>Italian</span>
-                                    </div>
-                                    <p></p>
-                                </div>
-                            </div>
+                      <a href = {item.attribution.url} target="_blank" className={styles.link}>
+                        <div className={styles.card}>
+                          <h2>{item.name}</h2>
                         </div>
+                      </a>
                     );
-                })}</div>
-             </div>
+                })}
+             </Container>
         );
     };
 
