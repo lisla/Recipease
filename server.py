@@ -41,19 +41,25 @@ def recipes():
     # TODO: Rank all recipes based on their ingredients
     # Get top 5 and fetch links for these recipes using the API
     # Return recipe:link
-    sorted_scores = s.execute_query(i, recipe_ids_to_info)
+    result = s.execute_query(i, recipe_ids_to_info)
 
     # print(i, file=sys.stderr)
-    print(sorted_scores[:5])
-    json_data = json.dumps(sorted_scores[:5])
+    json_data = json.dumps(result)
     return json_data
 
 # Get the associated ingredients for a particular ingredient
 @app.route("/associated", methods = ['GET'])
 def associated():
-    ingredient = request.args.get('ingredient')
-    associated_ingredients = ranked_related_ingredients_map[ingredient]
-    json_data = json.dumps(associated_ingredients)
+    ingredients = request.args.get('ingredients')
+    i = ingredients.split(',')
+    out = []
+    for ingredient in i:
+        associated_ingredients = ranked_related_ingredients_map[ingredient]
+        for suggestion in associated_ingredients:
+            if not (suggestion in ingredients) and not (suggestion in out):
+                out.append(suggestion)
+    print(out)
+    json_data = json.dumps(out)
     return json_data
 
 if __name__ == "__main__":
