@@ -55,7 +55,9 @@ def associated():
     out = []
     for ingredient in i:
         associated_ingredients = ranked_related_ingredients_map[ingredient]
-        out.extend(associated_ingredients)
+        for suggestion in associated_ingredients:
+            if not (suggestion in ingredients) and not (suggestion in out):
+                out.append(suggestion)
     print(out)
     json_data = json.dumps(out)
     return json_data
