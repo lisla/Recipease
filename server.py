@@ -50,9 +50,14 @@ def recipes():
 # Get the associated ingredients for a particular ingredient
 @app.route("/associated", methods = ['GET'])
 def associated():
-    ingredient = request.args.get('ingredient')
-    associated_ingredients = ranked_related_ingredients_map[ingredient]
-    json_data = json.dumps(associated_ingredients)
+    ingredients = request.args.get('ingredients')
+    i = ingredients.split(',')
+    out = []
+    for ingredient in i:
+        associated_ingredients = ranked_related_ingredients_map[ingredient]
+        out.extend(associated_ingredients)
+    print(out)
+    json_data = json.dumps(out)
     return json_data
 
 if __name__ == "__main__":

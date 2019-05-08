@@ -57,10 +57,14 @@ body {
   margin: 5px;
   border-radius: 10px;
   border: 1px solid;
-  margin-left: 150px;
-  margin-right: 150px;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 
 .card:hover {
   background-color: #ff9966;
+}
+
+.suggestion {
+  margin: 2%;
 }
