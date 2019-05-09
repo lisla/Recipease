@@ -5,6 +5,9 @@ import { getSuggestions } from '../actions/suggestions';
 import {Button, Input, Container, Checkbox} from 'semantic-ui-react';
 import styles from "./Home.module.scss";
 import IngredientList from "./IngredientList";
+import Image from "semantic-ui-react/dist/commonjs/elements/Image/Image";
+import List from "semantic-ui-react/dist/commonjs/elements/List/List";
+import Segment from "semantic-ui-react/dist/commonjs/elements/Segment/Segment";
 
 class SearchRecipes extends React.Component {
     constructor(props) {
@@ -77,6 +80,10 @@ class SearchRecipes extends React.Component {
       this.setState({showResults: true, showSuggestions: false});
     }
 
+    handleClear = async () => {
+        this.setState({showSuggestions: false, showResults: false, recipes: [], ingredients: [], suggestions: [], suggestionsToAdd: []});
+    }
+
     displaySuggestions = () => {
       let self = this;
       return (
@@ -99,24 +106,27 @@ class SearchRecipes extends React.Component {
     populateResults = () => {
         let self = this;
         return(
-            <Container className={styles.section}>
-              {self.state.recipes.map(function(item, index) {
-                    return (
-                      <a href = {item.attribution.url} target="_blank" className={styles.link}>
-                        <div className={styles.card}>
-                          <h2>{item.name}</h2>
-                        </div>
-                      </a>
-                    );
-                })}
-             </Container>
-        );
+            <Segment className={styles.section}>
+                <Container className={styles.results}>
+                      <List divided verticalAlign='center' alignContent="center">{self.state.recipes.map(function(item, index) {
+                            return (
+                                <List.Item>
+                                    <Image src={item.images[0].hostedSmallUrl} className={styles.resultsImg} />
+                                    <List.Content>
+                                        <List.Header as='a' href={item.attribution.url} target="_blank">{item.name}</List.Header>
+                                        <List.Description>Total cook time: {item.totalTime}</List.Description>
+                                    </List.Content>
+                                </List.Item>
+                            );
+                      })}</List>
+                 </Container>
+                <Button onClick={this.handleClear}>Clear</Button>
+            </Segment>)
     };
 
     render() {
         return(
-            <div className="Recipes">
-                <div className={styles.body}>
+            <div className={styles.recipes}>
                     <div className={styles.headerBar}>
                         <h1>Recipease</h1>
                     </div>
@@ -129,7 +139,6 @@ class SearchRecipes extends React.Component {
                     <div className={styles.listWrapper}>
                         <IngredientList ingredients={this.state.ingredients} />
                     </div>
-                </div>
                 {this.state.showSuggestions ?
                   this.displaySuggestions() :
                   <Button onClick={this.handleSubmit}>Submit</Button>

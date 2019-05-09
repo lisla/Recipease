@@ -46,6 +46,30 @@ body {
 
 .section {
   text-decoration: none;
+  width: 50%;
+}
+
+.recipes {
+  display:flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.results {
+  width: 50%;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+}
+
+.resultsImg {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  margin: 4px;
 }
 
 .link {
