@@ -8,6 +8,7 @@ import IngredientList from "./IngredientList";
 import Image from "semantic-ui-react/dist/commonjs/elements/Image/Image";
 import List from "semantic-ui-react/dist/commonjs/elements/List/List";
 import Segment from "semantic-ui-react/dist/commonjs/elements/Segment/Segment";
+import Icon from "semantic-ui-react/dist/commonjs/elements/Icon/Icon";
 
 class SearchRecipes extends React.Component {
     constructor(props) {
@@ -113,7 +114,7 @@ class SearchRecipes extends React.Component {
                                 <List.Item>
                                     <Image src={item.images[0].hostedSmallUrl} className={styles.resultsImg} />
                                     <List.Content>
-                                        <List.Header as='a' href={item.attribution.url} target="_blank">{item.name}</List.Header>
+                                        <List.Header as='a' href={`https://www.yummly.com/recipe/${item.id}`} target="_blank">{item.name}</List.Header>
                                         <List.Description>Total cook time: {item.totalTime}</List.Description>
                                     </List.Content>
                                 </List.Item>
@@ -141,7 +142,10 @@ class SearchRecipes extends React.Component {
                     </div>
                 {this.state.showSuggestions ?
                   this.displaySuggestions() :
-                  <Button onClick={this.handleSubmit}>Submit</Button>
+                  <Button onClick={this.handleSubmit}>
+                      <Icon name='food' />
+                      Find Recipes
+                  </Button>
                 }
                 {this.state.showResults ?
                     this.populateResults()  :
