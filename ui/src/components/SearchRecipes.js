@@ -50,7 +50,7 @@ class SearchRecipes extends React.Component {
     }
 
     addItem() {
-        this.setState({ingredients: this.state.ingredients.concat(this.state.value)});
+        this.setState({ingredients: this.state.ingredients.concat(this.state.value.toLowerCase())});
         this.setState({value: ''});
     }
 
